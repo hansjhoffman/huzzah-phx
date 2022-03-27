@@ -13,8 +13,8 @@ help: header targets
 
 .PHONY: header
 header:
-	@echo "\033[34mEnvironment\033[0m"
-	@echo "\033[34m---------------------------------------------------------------\033[0m"
+	@printf "\n\033[34mEnvironment\033[0m\n"
+	@printf "\033[34m---------------------------------------------------------------\033[0m\n"
 	@printf "\033[33m%-23s\033[0m" "APP_NAME"
 	@printf "\033[35m%s\033[0m" $(APP_NAME)
 	@echo ""
@@ -23,12 +23,12 @@ header:
 	@echo ""
 	@printf "\033[33m%-23s\033[0m" "GIT_REVISION"
 	@printf "\033[35m%s\033[0m" $(GIT_REVISION)
-	@echo "\n"
+	@echo ""
 
 .PHONY: targets
 targets:
-	@echo "\033[34mTargets\033[0m"
-	@echo "\033[34m---------------------------------------------------------------\033[0m"
+	@printf "\n\033[34mTargets\033[0m\n"
+	@printf "\033[34m---------------------------------------------------------------\033[0m\n"
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-22s\033[0m %s\n", $$1, $$2}'
 
 # Build targets
