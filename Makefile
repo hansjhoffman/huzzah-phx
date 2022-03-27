@@ -81,3 +81,7 @@ lint: lint-ex ## Lint all the files
 .PHONY: lint-ex
 lint-ex:
 	mix credo --strict
+
+.PHONE: lint-js
+lint-js:
+	cd assets && yarn eslint 'js/*.{js,ts}'
