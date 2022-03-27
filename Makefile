@@ -71,6 +71,10 @@ format-ex:
 format-css:
 	cd assets && yarn prettier --write 'css/*.css'
 
+.PHONY: format-js
+format-js:
+	cd assets && yarn prettier --write 'js/*.{js,ts}'
+
 .PHONY: lint
 lint: lint-ex ## Lint all the files
 
