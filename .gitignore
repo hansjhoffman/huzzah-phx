@@ -6,6 +6,7 @@
 
 # The directory Mix downloads your dependencies sources to.
 /deps/
+**/node_modules/
 
 # Where 3rd-party dependencies like ExDoc output generated docs.
 /doc/
@@ -29,9 +30,15 @@ bagheera-*.tar
 
 # Editors
 .idea
-.nova/Configuration.json
+.nova
+.vscode
 
+# Misc
+.DS_Store
+
+# Logs
+*.log
+
+# Environment related stuff
+.env*
 .nix*
-
-# env
-.envrc
