@@ -61,11 +61,15 @@ test: ## Test code
 # ------------------------------
 
 .PHONY: format
-format: format-ex ## Format all the files
+format: format-ex format-css ## Format all the files
 
 .PHONY: format-ex
 format-ex:
 	mix format
+
+.PHONY: format-css
+format-css:
+	cd assets && yarn prettier --write 'css/*.css'
 
 .PHONY: lint
 lint: lint-ex ## Lint all the files
