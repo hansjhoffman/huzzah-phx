@@ -4,6 +4,7 @@ import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
 import { createChart } from "lightweight-charts";
 import topbar from "../vendor/topbar";
+import "./tradingview";
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 let liveSocket = new LiveSocket("/live", Socket, { params: { _csrf_token: csrfToken } });
@@ -21,18 +22,3 @@ liveSocket.connect();
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket;
-
-const chart = createChart(document.body, { width: 400, height: 300 });
-const lineSeries = chart.addLineSeries();
-lineSeries.setData([
-  { time: "2019-04-11", value: 80.01 },
-  { time: "2019-04-12", value: 96.63 },
-  { time: "2019-04-13", value: 76.64 },
-  { time: "2019-04-14", value: 81.89 },
-  { time: "2019-04-15", value: 74.43 },
-  { time: "2019-04-16", value: 80.01 },
-  { time: "2019-04-17", value: 96.63 },
-  { time: "2019-04-18", value: 76.64 },
-  { time: "2019-04-19", value: 81.89 },
-  { time: "2019-04-20", value: 74.43 },
-]);

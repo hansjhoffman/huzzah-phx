@@ -18,12 +18,9 @@ defmodule HuzzahWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/assets/:ticker", AssetController, :show
+    live "/asset", AssetLive
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", HuzzahWeb do
-  #   pipe_through :api
-  # end
 
   # Enables LiveDashboard only for development
   #
