@@ -171,10 +171,11 @@ defmodule HuzzahWeb.AssetLive do
 
   @impl true
   def handle_params(%{"ticker" => ticker}, _, socket) do
-    {:noreply,
-     socket
-     |> assign(:page_title, page_title(ticker))
-     |> assign(:candle_data, @mock_ohlc)}
+    socket =
+      socket
+      |> assign(:page_title, page_title(ticker))
+
+    {:noreply, socket}
   end
 
   defp page_title(ticker), do: ticker <> " - Huzzah"
