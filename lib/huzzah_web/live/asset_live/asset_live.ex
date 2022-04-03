@@ -1,23 +1,13 @@
 defmodule HuzzahWeb.AssetLive do
+  @moduledoc """
+  Module that will interact with TradingView charting library.
+  """
+
   use HuzzahWeb, :live_view
 
-  @impl true
-  def mount(%{"ticker" => ticker}, _session, socket) do
-    socket =
-      socket
-      |> assign(:ticker, ticker)
-
-    {:ok, socket}
-  end
-
-  @impl true
-  def handle_params(%{"ticker" => ticker}, _, socket) do
-    {:noreply,
-     socket
-     |> assign(:page_title, page_title(ticker))
-     |> assign(:candle_data, """
-        [
-        { "time": "2018-10-19", "open": 180.34, "high": 180.99, "low": 178.57, "close": 179.85 },
+  @mock_ohlc """
+     [
+     { "time": "2018-10-19", "open": 180.34, "high": 180.99, "low": 178.57, "close": 179.85 },
      { "time": "2018-10-22", "open": 180.82, "high": 181.40, "low": 177.56, "close": 178.75 },
      { "time": "2018-10-23", "open": 175.77, "high": 179.49, "low": 175.44, "close": 178.53 },
      { "time": "2018-10-24", "open": 178.58, "high": 182.37, "low": 176.31, "close": 176.97 },
@@ -166,11 +156,26 @@ defmodule HuzzahWeb.AssetLive do
      { "time": "2019-05-22", "open": 190.49, "high": 192.22, "low": 188.05, "close": 188.91 },
      { "time": "2019-05-23", "open": 188.45, "high": 192.54, "low": 186.27, "close": 192.00 },
      { "time": "2019-05-24", "open": 192.54, "high": 193.86, "low": 190.41, "close": 193.59 }
-        ]
-     """)}
+     ]
+  """
+
+  @impl true
+  def mount(%{"ticker" => ticker}, _session, socket) do
+    socket =
+      socket
+      |> assign(:ticker, ticker)
+      |> push_event("ohlc", %{ohlc_data: @mock_ohlc})
+
+    {:ok, socket}
+  end
+
+  @impl true
+  def handle_params(%{"ticker" => ticker}, _, socket) do
+    {:noreply,
+     socket
+     |> assign(:page_title, page_title(ticker))
+     |> assign(:candle_data, @mock_ohlc)}
   end
 
   defp page_title(ticker), do: ticker <> " - Huzzah"
 end
-
-# https://www.youtube.com/watch?v=x1rx4-AAcMQ
