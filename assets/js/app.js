@@ -2,58 +2,12 @@
 import "phoenix_html";
 import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
-import { createChart, CrosshairMode, PriceScaleMode } from "lightweight-charts";
 
 import topbar from "../vendor/topbar";
+import ChartHook from "./chartHook";
 
 const hooks = {
-  chart: {
-    mounted() {
-      const chart = createChart(this.el, {
-        width: 1000,
-        height: 600,
-        layout: {
-          background: {
-            color: "#161a25",
-          },
-          textColor: "#b2b5be",
-          fontSize: 12,
-        },
-        grid: {
-          vertLines: {
-            visible: false,
-          },
-          horzLines: {
-            visible: false,
-          },
-        },
-        crosshair: {
-          mode: CrosshairMode.Normal,
-        },
-        rightPriceScale: {
-          borderColor: "#b2b5be",
-          mode: PriceScaleMode.Logarithmic,
-        },
-        timeScale: {
-          borderColor: "#b2b5be",
-        },
-      });
-
-      const candleSeries = chart.addCandlestickSeries({
-        upColor: "#26a69a",
-        downColor: "#ef5350",
-        wickUpColor: "#26a69a",
-        wickDownColor: "#ef5350",
-      });
-
-      this.handleEvent("ohlc", ({ ohlc_data }) => {
-        candleSeries.setData(JSON.parse(ohlc_data));
-      });
-    },
-    updated() {
-      console.log("updated");
-    },
-  },
+  Chart: ChartHook,
   Hotkeys: {
     mounted() {},
   },
@@ -70,8 +24,8 @@ topbar.config({
   barColors: { 0: "#29d" },
   shadowColor: "rgba(0, 0, 0, .3)",
 });
-window.addEventListener("phx:page-loading-start", (info) => topbar.show());
-window.addEventListener("phx:page-loading-stop", (info) => topbar.hide());
+window.addEventListener("phx:page-loading-start", (_info) => topbar.show());
+window.addEventListener("phx:page-loading-stop", (_info) => topbar.hide());
 
 // connect if there are any LiveViews on the page
 liveSocket.connect();
