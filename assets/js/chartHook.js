@@ -46,9 +46,7 @@ export default {
     });
   },
   beforeUpdate() {},
-  updated() {
-    console.log("updated");
-  },
+  updated() {},
   destroyed() {},
   disconnected() {},
   reconnected() {},

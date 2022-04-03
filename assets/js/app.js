@@ -1,4 +1,3 @@
-// Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
 import "phoenix_html";
 import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
@@ -8,9 +7,7 @@ import ChartHook from "./chartHook";
 
 const hooks = {
   Chart: ChartHook,
-  Hotkeys: {
-    mounted() {},
-  },
+  Hotkeys: {},
 };
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
