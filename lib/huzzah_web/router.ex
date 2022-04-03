@@ -18,8 +18,8 @@ defmodule HuzzahWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/assets/:ticker", AssetController, :show
-    live "/asset", AssetLive
+    # get "/assets/:ticker", AssetController, :show
+    live "/assets/:ticker", AssetLive
   end
 
   # Enables LiveDashboard only for development
