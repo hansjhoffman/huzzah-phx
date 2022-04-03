@@ -1,9 +1,39 @@
-import { createChart } from "lightweight-charts";
+import { createChart, CrosshairMode, PriceScaleMode } from "lightweight-charts";
 
 /*
  * Custom Web Component to render TradingView chart
  * and interact w/ LiveView through Custom Events.
  */
+
+const CONFIG = {
+  width: 1000,
+  height: 600,
+  layout: {
+    background: {
+      color: "#161a25",
+    },
+    textColor: "#b2b5be",
+    fontSize: 12,
+  },
+  grid: {
+    vertLines: {
+      visible: false,
+    },
+    horzLines: {
+      visible: false,
+    },
+  },
+  crosshair: {
+    mode: CrosshairMode.Normal,
+  },
+  rightPriceScale: {
+    borderColor: "#b2b5be",
+    mode: PriceScaleMode.Logarithmic,
+  },
+  timeScale: {
+    borderColor: "#b2b5be",
+  },
+};
 
 class Chart extends HTMLElement {
   static get observedAttributes() {
@@ -12,7 +42,6 @@ class Chart extends HTMLElement {
 
   constructor() {
     super();
-    // let shadowRoot = this.attachShadow({ mode: "open" });
 
     this.candleData = [];
   }
@@ -20,10 +49,15 @@ class Chart extends HTMLElement {
   connectedCallback() {
     console.log("connected");
 
-    this.chart = createChart(this, { width: 500, height: 300 });
+    this.chart = createChart(this, CONFIG);
 
-    let lineSeries = this.chart.addLineSeries();
-    lineSeries.setData(this.candleData);
+    let candleSeries = this.chart.addCandlestickSeries({
+      upColor: "#26a69a",
+      downColor: "#ef5350",
+      wickUpColor: "#26a69a",
+      wickDownColor: "#ef5350",
+    });
+    candleSeries.setData(this.candleData);
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {
@@ -36,7 +70,6 @@ class Chart extends HTMLElement {
     switch (attrName) {
       case "data-candles":
         this.candleData = JSON.parse(newVal);
-        console.log("new data: ", newVal);
         break;
       default:
         break;
@@ -46,4 +79,4 @@ class Chart extends HTMLElement {
   disconnectedCallback() {}
 }
 
-customElements.define("tradingview-chart", Chart);
+customElements.define("tv-chart", Chart);
