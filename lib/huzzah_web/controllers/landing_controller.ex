@@ -1,4 +1,4 @@
-defmodule HuzzahWeb.PageController do
+defmodule HuzzahWeb.LandingController do
   use HuzzahWeb, :controller
 
   def index(conn, _params) do

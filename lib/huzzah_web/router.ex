@@ -17,9 +17,14 @@ defmodule HuzzahWeb.Router do
   scope "/", HuzzahWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
-    # get "/assets/:ticker", AssetController, :show
-    live "/assets/:ticker", AssetLive
+    get "/", LandingController, :index
+  end
+
+  scope "/cryptocurrencies", HuzzahWeb do
+    pipe_through :browser
+
+    get "/", MarketCapController, :index
+    live "/:ticker", CryptoLive
   end
 
   # Enables LiveDashboard only for development

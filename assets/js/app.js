@@ -6,16 +6,10 @@ import { createChart, CrosshairMode, PriceScaleMode } from "lightweight-charts";
 
 import topbar from "../vendor/topbar";
 
-const Hooks = {
-  Chart: {
+const hooks = {
+  chart: {
     mounted() {
-      const elChart = document.getElementById("tv-chart");
-
-      if (elChart === undefined) {
-        return;
-      }
-
-      const chart = createChart(elChart, {
+      const chart = createChart(this.el, {
         width: 1000,
         height: 600,
         layout: {
@@ -68,7 +62,7 @@ const Hooks = {
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 let liveSocket = new LiveSocket("/live", Socket, {
   params: { _csrf_token: csrfToken },
-  hooks: Hooks,
+  hooks: hooks,
 });
 
 // Show progress bar on live navigation and form submits

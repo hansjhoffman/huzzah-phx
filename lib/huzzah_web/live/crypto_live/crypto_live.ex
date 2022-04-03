@@ -1,4 +1,4 @@
-defmodule HuzzahWeb.AssetLive do
+defmodule HuzzahWeb.CryptoLive do
   @moduledoc """
   Module that will interact with TradingView charting library.
   """
