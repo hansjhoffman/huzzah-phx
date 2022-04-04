@@ -1,7 +1,7 @@
 import_if_available(Ecto.Query)
 import_if_available(Ecto.Changeset)
 
-alias Bagheera.Links
+alias Huzzah.NomicsClient
 
 defmodule AC do
   IEx.configure(

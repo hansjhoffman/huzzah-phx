@@ -1,3 +1,36 @@
-<section class="">
+<section class="" data-testid="marketcap-table">
   <h1>Cryptocurrencies by Market Cap</h1>
+  <table>
+    <caption class="tw-hidden">Cryptocurrencies by Market Cap</caption>
+    <thead>
+      <tr>
+        <th></th>
+        <th>#</th>
+        <th>Ticker</th>
+        <th>Price</th>
+        <th>24hr %</th>
+        <th>Market Cap</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%= for crypto <- @cryptos do %>
+      <tr>
+        <td>star</td>
+        <td><%= crypto["rank"] %></td>
+        <td>
+          <%= live_redirect to: Routes.live_path(@conn, HuzzahWeb.CryptoLive,
+            crypto["symbol"] |> String.trim |> String.downcase),
+            class: "" do %>
+          <div><%= crypto["name"] %> (<%= crypto["symbol"] %>)</div>
+          <% end %>
+        </td>
+        <td><%= crypto["price"] %></td>
+        <td><%= format_percent(crypto["1d"]["price_change_pct"]) %>%</td>
+        <td><%= crypto["market_cap"] %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </section>
+
+<a href="https://nomics.com/">Crypto Market Cap & Pricing Data Provided By Nomics</a>

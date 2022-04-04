@@ -56,7 +56,9 @@ defmodule Huzzah.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:credo, "~> 1.6.4", only: [:dev, :test], runtime: false},
-      {:ecto_psql_extras, "0.7.4"}
+      {:ecto_psql_extras, "0.7.4"},
+      {:tesla, "~> 1.4"},
+      {:hackney, "~> 1.18"}
     ]
   end
 
