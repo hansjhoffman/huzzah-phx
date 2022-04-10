@@ -84,7 +84,10 @@ defmodule HuzzahWeb.MarketCapControllerTest do
   end
 
   test "GET /cryptocurrencies", %{conn: conn} do
-    conn = get(conn, Routes.market_cap_path(conn, :index))
+    conn =
+      conn
+      |> register_and_log_in_user()
+      |> get(Routes.market_cap_path(conn, :index))
 
     assert html_response(conn, 200) =~ "BTC"
   end

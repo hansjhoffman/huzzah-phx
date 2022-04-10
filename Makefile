@@ -45,7 +45,7 @@ build: ## Make a production build
 clean: ## Remove build artifacts
 	rm -rf _build
 
-.PHONE: deps
+.PHONY: deps
 deps: ## Install dependencies
 	mix deps.get --force
 
@@ -61,27 +61,23 @@ test: ## Test code
 # ------------------------------
 
 .PHONY: format
-format: format-ex format-css ## Format all the files
+format: format-ex format-assets ## Format all the files
 
 .PHONY: format-ex
 format-ex:
 	mix format
 
-.PHONY: format-css
-format-css:
-	cd assets && yarn prettier --write 'css/*.css'
-
-.PHONY: format-js
-format-js:
-	cd assets && yarn prettier --write 'js/*.{js,ts}'
+.PHONY: format-assets
+format-assets:
+	cd assets && yarn prettier --write '**/*.{css,js,ts}'
 
 .PHONY: lint
-lint: lint-ex ## Lint all the files
+lint: lint-ex lint-js ## Lint all the files
 
 .PHONY: lint-ex
 lint-ex:
 	mix credo --strict
 
-.PHONE: lint-js
+.PHONY: lint-js
 lint-js:
 	cd assets && yarn eslint 'js/*.{js,ts}'

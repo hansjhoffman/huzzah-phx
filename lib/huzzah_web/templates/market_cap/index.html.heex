@@ -13,22 +13,22 @@
       </tr>
     </thead>
     <tbody>
-    <%= for crypto <- @cryptos do %>
-      <tr>
-        <td>star</td>
-        <td><%= crypto["rank"] %></td>
-        <td>
-          <%= live_redirect to: Routes.live_path(@conn, HuzzahWeb.CryptoLive,
+      <%= for crypto <- @cryptos do %>
+        <tr>
+          <td>star</td>
+          <td><%= crypto["rank"] %></td>
+          <td>
+            <%= live_redirect to: Routes.live_path(@conn, HuzzahWeb.CryptoLive,
             crypto["symbol"] |> String.trim |> String.downcase),
             class: "" do %>
-          <div><%= crypto["name"] %> (<%= crypto["symbol"] %>)</div>
-          <% end %>
-        </td>
-        <td><%= crypto["price"] %></td>
-        <td><%= format_percent(crypto["1d"]["price_change_pct"]) %>%</td>
-        <td><%= crypto["market_cap"] %></td>
-      </tr>
-    <% end %>
+              <div><%= crypto["name"] %> (<%= crypto["symbol"] %>)</div>
+            <% end %>
+          </td>
+          <td><%= crypto["price"] %></td>
+          <td><%= format_percent(crypto["1d"]["price_change_pct"]) %>%</td>
+          <td><%= crypto["market_cap"] %></td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 </section>

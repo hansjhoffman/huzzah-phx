@@ -4,6 +4,6 @@ defmodule HuzzahWeb.LandingControllerTest do
   test "GET /", %{conn: conn} do
     conn = get(conn, Routes.landing_path(conn, :index))
 
-    assert html_response(conn, 200) =~ "Are you overpaying for crypto assets?"
+    assert html_response(conn, 200) =~ "Hero section"
   end
 end

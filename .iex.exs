@@ -2,6 +2,7 @@ import_if_available(Ecto.Query)
 import_if_available(Ecto.Changeset)
 
 alias Huzzah.NomicsClient
+alias Huzzah.Repo
 
 defmodule AC do
   IEx.configure(

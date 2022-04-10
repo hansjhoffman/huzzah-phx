@@ -4,12 +4,30 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:image:width" content="" />
+    <meta property="og:image:height" content="" />
+    <meta property="twitter:site" content="" />
+    <meta property="twitter:card" content="" />
+    <meta property="twitter:image" content="" />
+
     <%= csrf_meta_tag() %>
-    <%= live_title_tag assigns[:page_title] || "Huzzah", suffix: " · Phoenix Framework" %>
-    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
-    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
+    <%= live_title_tag(assigns[:page_title] || "Huzzah", suffix: " · Phoenix Framework") %>
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")} />
+    <link phx-track-static rel="manifest" href={Routes.static_path(@conn, "/manifest.json")} />
+    <script
+      defer
+      phx-track-static
+      type="text/javascript"
+      src={Routes.static_path(@conn, "/assets/app.js")}
+    >
+    </script>
   </head>
 
   <body>
@@ -17,9 +35,12 @@
       <nav>
         <ul>
           <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-            <li><%= link "Live Dashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
+            <li>
+              <%= link("Live Dashboard", to: Routes.live_dashboard_path(@conn, :home)) %>
+            </li>
           <% end %>
         </ul>
+        <%= render("_user_menu.html", assigns) %>
       </nav>
     </header>
     <%= @inner_content %>

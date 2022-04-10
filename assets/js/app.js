@@ -7,7 +7,6 @@ import ChartHook from "./chartHook";
 
 const hooks = {
   Chart: ChartHook,
-  Hotkeys: {},
 };
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
@@ -28,7 +27,37 @@ window.addEventListener("phx:page-loading-stop", (_info) => topbar.hide());
 liveSocket.connect();
 
 // expose liveSocket on window for web console debug logs and latency simulation:
-// >> liveSocket.enableDebug()
-// >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
-// >> liveSocket.disableLatencySim()
+// liveSocket.enableDebug();
+// liveSocket.enableLatencySim(1000);  // enabled for duration of browser session
+// liveSocket.disableLatencySim();
 window.liveSocket = liveSocket;
+
+let loginPasswordMaskEl = document.getElementById("login-password-mask");
+if (loginPasswordMaskEl !== null) {
+  loginPasswordMaskEl.addEventListener("click", (_evt) => {
+    const passwordInputEl = document.getElementById("user_password");
+
+    if (passwordInputEl.getAttribute("type") == "password") {
+      passwordInputEl.setAttribute("type", "text");
+      loginPasswordMaskEl.innerText = "Hide";
+    } else {
+      passwordInputEl.setAttribute("type", "password");
+      loginPasswordMaskEl.innerText = "Show";
+    }
+  });
+}
+
+let registerPasswordMaskEl = document.getElementById("register-password-mask");
+if (registerPasswordMaskEl !== null) {
+  registerPasswordMaskEl.addEventListener("click", (_evt) => {
+    const passwordInputEl = document.getElementById("user_password");
+
+    if (passwordInputEl.getAttribute("type") == "password") {
+      passwordInputEl.setAttribute("type", "text");
+      registerPasswordMaskEl.innerText = "Hide";
+    } else {
+      passwordInputEl.setAttribute("type", "password");
+      registerPasswordMaskEl.innerText = "Show";
+    }
+  });
+}

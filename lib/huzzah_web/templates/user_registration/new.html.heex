@@ -1,0 +1,62 @@
+<div class="tw-min-h-full tw-flex tw-flex-col tw-items-center tw-py-12">
+  <div class="tw-mb-12">
+    <img
+      src={Routes.static_path(@conn, "/images/phoenix.png")}
+      alt="Huzzah Logo"
+      class="tw-mx-auto"
+    />
+    <h2 class="tw-text-3xl tw-font-bold tw-text-center tw-text-gray-900">Register</h2>
+  </div>
+
+  <.form
+    let={f}
+    for={@changeset}
+    action={Routes.user_registration_path(@conn, :create)}
+    class="tw-grid tw-grid-cols-1 tw-gap-6"
+  >
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <div class="">
+      <%= label(f, :email) %>
+      <%= email_input(f, :email,
+        required: true,
+        autocomplete: true,
+        class: "tw-w-full tw-border-gray-300 tw-rounded-md"
+      ) %>
+      <%= error_tag(f, :email) %>
+    </div>
+
+    <div class="">
+      <%= label(f, :handle) %>
+      <%= text_input(f, :handle, required: true, class: "tw-w-full tw-border-gray-300 tw-rounded-md") %>
+      <%= error_tag(f, :handle) %>
+    </div>
+
+    <div class="">
+      <div class="tw-flex tw-items-center tw-justify-between">
+        <%= label(f, :password) %>
+        <span class="tw-text-sm tw-cursor-pointer" id="register-password-mask">Show</span>
+      </div>
+      <%= password_input(f, :password,
+        required: true,
+        class: "tw-w-full tw-border-gray-300 tw-rounded-md"
+      ) %>
+      <%= error_tag(f, :password) %>
+    </div>
+
+    <div>
+      <%= submit("Register",
+        class:
+          "tw-flex tw-w-full tw-justify-center tw-py-2 tw-px-4 tw-border tw-border-transparent tw-rounded-md tw-text-sm tw-font-medium tw-text-white tw-bg-indigo-600 hover:tw-bg-indigo-700 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2 focus:tw-ring-indigo-500"
+      ) %>
+    </div>
+
+    <p class="tw-text-center">
+      By signing up, you agree to our Terms, Data Policy and Cookies Poliy.
+    </p>
+  </.form>
+</div>
